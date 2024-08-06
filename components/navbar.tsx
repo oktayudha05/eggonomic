@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authUserSession } from "@/libs/auth-lib";
 import Link from "next/link";
 
 export default async function Navbar({ title }: { title: string }) {
-  const session = await getServerSession(authOptions);
+  const session = await authUserSession();
 
   return (
     // <header className="bg-gray-800">

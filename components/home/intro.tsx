@@ -1,11 +1,10 @@
 import React from "react";
 import ButtonOff from "./buttonOff";
 import ButtonOn from "./buttonOn";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authUserSession } from "@/libs/auth-lib";
 
 export default async function Intro() {
-  const session = await getServerSession(authOptions);
+  const session = await authUserSession();
   return (
     <section className="text-white">
       <div className="px-4 pt-0 md:py-40">
