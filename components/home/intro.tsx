@@ -1,7 +1,6 @@
 import React from "react";
-import ButtonOff from "./buttonOff";
-import ButtonOn from "./buttonOn";
 import { authUserSession } from "@/libs/auth-lib";
+import KontrolMesin from "./kontrolMesin";
 
 export default async function Intro() {
   const session = await authUserSession();
@@ -19,8 +18,9 @@ export default async function Intro() {
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-            Be part of the change. Educate yourself on recycling practices and
-            help us create a greener, cleaner world for future generations.
+            Eggonomic adalah alat pakan ayam otomatis yang memastikan pakan
+            selalu tersedia, mengurangi tenaga kerja manual, dan meningkatkan
+            produktivitas ternak.
           </p>
 
           <div className="mt-4 mb-4 sm:mb-0 sm:mt-8 flex flex-wrap justify-center sm:justify-start gap-4">
@@ -32,10 +32,7 @@ export default async function Intro() {
                 Login
               </a>
             ) : (
-              <>
-                <ButtonOn />
-                <ButtonOff />
-              </>
+              <KontrolMesin />
             )}
           </div>
         </div>
