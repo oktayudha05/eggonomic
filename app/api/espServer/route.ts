@@ -8,7 +8,7 @@ const mqttOptions = {
   password: `${process.env.MQTT_PASS}`,
 };
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   const { searchParams } = new URL(req.url);
   const state = searchParams.get("state");
 
@@ -19,10 +19,10 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  try {
-    const client = mqtt.connect(mqttServer, mqttOptions);
+  return new Promise((resolve, reject) => {
+    try {
+      const client = mqtt.connect(mqttServer, mqttOptions);
 
-    return new Promise((resolve, reject) => {
       client.on("connect", () => {
         console.log("Connected to MQTT broker");
 
@@ -53,13 +53,14 @@ export async function GET(req: NextRequest) {
           )
         );
       });
-    });
-  } catch (error) {
-    console.error("Unexpected Error:", error);
-    return NextResponse.json(
-      { message: "Unexpected error occurred" },
-      { status: 500 }
-    );
-  }
+    } catch (error) {
+      console.error("Unexpected Error:", error);
+      reject(
+        NextResponse.json(
+          { message: "Unexpected error occurred" },
+          { status: 500 }
+        )
+      );
+    }
+  });
 }
-
