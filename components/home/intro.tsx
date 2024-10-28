@@ -34,6 +34,7 @@ export default async function Intro() {
             ) : (
               <KontrolMesin />
             )}
+            {/* <KontrolMesin /> */}
           </div>
         </div>
       </div>

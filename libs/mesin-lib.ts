@@ -4,7 +4,9 @@ export const handleLEDControl = async (
   newState: string
 ): Promise<{ message: string; state: string }> => {
   try {
-    const response = await fetch(`/api/espServer?state=${newState}`);
+    const response = await fetch(
+      `/api/espServer?state=${newState.toUpperCase()}`
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
